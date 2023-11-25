@@ -1,0 +1,41 @@
+.my-button {
+    /* padding: 15px 25px; */
+    border: unset;
+    height: 48px;
+    color: #fff;
+    z-index: 1;
+    background: #ff5c17;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    color: #fff;
+    transition: all 500ms;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  
+  .my-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+  
+    background-color: #fff;
+    /* border: 2px solid #ff5c17; */
+    z-index: -1;
+    border-radius: 4px;
+    transition: all 500ms;
+  }
+  
+  .my-button:hover {
+    color: #313131;
+    border-radius: 8px;
+  }
+  
+  .my-button:hover::before {
+    border-radius: 4px;
+    width: 100%;
+  }
+  
