@@ -75,7 +75,12 @@ const UseFul = () => {
                   {c?.title}
                 </p>
                 <Link
-                  to={"/"}
+                  to={`/new/${c?.id}`}
+                  onClick={() => {
+                    window.scrollTo({
+                      top: 0
+                    })
+                  }}
                   className="text-[20px] font-semibold font-inter  text-mainColor"
                 >
                   Подробный

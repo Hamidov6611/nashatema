@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { FaWhatsapp, FaTelegram, FaPhone, FaTimes, FaVk, FaPhoneAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import './index.css'
 
 const UserLayout = ({ children, title, desc, h1 }) => {
   const [isContact, setIsContact] = useState(true);
@@ -61,9 +62,9 @@ const UserLayout = ({ children, title, desc, h1 }) => {
       {isContact && (
         <div
           onClick={() => setIsContact(false)}
-          className={`fixed z-[9999] right-[3%] md:right-[1%] top-[90vh] border-2 text-primary hover:transition-all duration-200 hover:scale-110 cursor-pointer ease-in-out hover:text-navcolor hover:border-navcolor border-primary hover:bg-primary ${
+          className={`rotateIn fixed z-[9999] right-[3%] md:right-[1%] top-[90vh] border-2 text-primary hover:transition-all duration-200 hover:scale-110 cursor-pointer ease-in-out hover:text-navcolor hover:border-navcolor border-primary hover:bg-primary ${
             !isContact ? "w-[40px] h-[40px]" : "w-[50px] h-[50px]"
-          } rounded-full bg-navcolor flex items-center justify-center rotate-90`}
+          } rounded-full bg-navcolor flex items-center justify-center rotate-90 `}
         >
           <FaPhone fontSize={"20px"} />
         </div>

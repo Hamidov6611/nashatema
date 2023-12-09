@@ -6,9 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css/pagination";
-import 'swiper/css/navigation';
+import "swiper/css/navigation";
 import MyButton from "../User/components/MyButton";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import PaginationBar from "./Pagination";
 
 const Catalog = () => {
   const [category, setCategory] = useState([]);
@@ -17,11 +18,14 @@ const Catalog = () => {
   const [search, setSearch] = useState();
   const [isCat, setIsCat] = useState(false);
   const navigate = useNavigate();
+  const [pageSize, setPageSize] = useState(Number);
+  const [pageId, setPageId] = useState(1);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const isStepTrue = queryParams.get("main");
   const isStepTrue2 = queryParams.get("status") === "true";
+  const searchProduct = queryParams.get("search");
 
   const getCategoryData = async () => {
     try {
@@ -63,7 +67,6 @@ const Catalog = () => {
       );
       const product = await getProductByMainCategoryId(id);
       setProducts(product);
-      console.log(category);
     } catch (error) {
       console.log(error);
     }
@@ -78,9 +81,19 @@ const Catalog = () => {
   const getProductData = async () => {
     try {
       const { data } = await axios.get(
-        `${url}/b_sayt/api/prouduct_all_objects_list_views/`
+        `${url}/b_sayt/api/prouduct_all_objects_list_views/?page=${pageId}`
       );
       setProducts(data?.data?.results);
+      setPageSize(data?.data?.count);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getProductData2 = async () => {
+    try {
+      const { data } = await axios.get(
+        `${url}/b_sayt/api/prouduct_all_objects_list_views/?page=${pageId + 1}`
+      );
       setProducts2(data?.data?.results);
     } catch (error) {
       console.log(error);
@@ -88,22 +101,20 @@ const Catalog = () => {
   };
   useEffect(() => {
     getProductData();
-  }, []);
+    getProductData2();
+  }, [pageId]);
 
-  const sendCatalog = (id) => {
-    console.log(id);
-    navigate(`/catalog/${id}`);
+  const sendCatalog = async (id, name) => {
+    navigate(`/catalog/${id}/${name?.replace(/\//g, "").replace(" ", "_")}`);
     window.scrollTo({
       top: 0,
     });
   };
-
   const getProductByIdCategory = async (id) => {
     try {
       const { data } = await axios.get(
         `${url}/b_sayt/api/prouduct_category_list_views/${id}/`
       );
-      console.log(data);
       setProducts(data?.data?.results);
     } catch (error) {
       console.log(error);
@@ -120,13 +131,21 @@ const Catalog = () => {
     };
   };
 
-  const handleSearch = debounce(() => {
-    const filtered = products.filter((product) =>
-      product?.name.toLowerCase().includes(search?.toLowerCase())
-    );
-    setProducts(filtered);
-    console.log(products);
-  });
+  const handleSearch = async () => {
+    if (search?.length == 0) {
+      getProductData();
+    }
+    try {
+      const { data } = await axios.get(
+        `${url}/b_sayt/api/product_filter_view/?search=${search}`
+      );
+      setProducts(data?.results);
+      console.log(data);
+      setPageSize(data?.count);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     handleSearch();
@@ -163,7 +182,25 @@ const Catalog = () => {
     добавитьТекстКОписанию();
     добавитьТекстКH1();
   });
+  useEffect(() => {
+    setTimeout(async () => {
+      if (searchProduct?.length > 0) {
+        // setSearch(searchProduct);
+        try {
+          const { data } = await axios.get(
+            `${url}/b_sayt/api/product_filter_view/?search=${searchProduct}`
+          );
+          setProducts(data?.results);
+          console.log(data);
+          setPageSize(data?.count);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }, 1000);
+  }, [searchProduct]);
 
+  console.log(search)
   return (
     <UserLayout
       title={"Каталог ЖБИ товаров по приятным ценнам в Санкт-Петербурге!"}
@@ -349,7 +386,7 @@ const Catalog = () => {
                         <SwiperSlide key={index}>
                           <div className="h-[212px] md:h-[300px]">
                             <img
-                              src={`${url}${item?.img}`}
+                              src={item?.img}
                               className="h-full w-full object-cover rounded-lg"
                               alt=""
                             />
@@ -361,10 +398,10 @@ const Catalog = () => {
                       {c?.name}
                     </p>
                     <p className="flex justify-center font-medium text-[16px] md:text-[18px] line-clamp-1 text-mainColor">
-                      {parseInt(c?.price) > 0 ? c?.price + " " : "Договорная"}₽
+                      {parseInt(c?.price) > 0 ? c?.price + " " : "Договорная"}
                     </p>
                     <div
-                      onClick={() => sendCatalog(c?.id)}
+                      onClick={() => sendCatalog(c?.id, c?.name)}
                       className="my-4 flex justify-center"
                     >
                       <MyButton title={"Подробнее"} class1={"px-12 mm:px-20"} />
@@ -417,7 +454,6 @@ const Catalog = () => {
                     <Swiper
                       pagination={true}
                       navigation={true}
-
                       modules={[Pagination, Navigation]}
                       className="mySwiper"
                     >
@@ -425,7 +461,7 @@ const Catalog = () => {
                         <SwiperSlide key={index}>
                           <div className="h-[212px] md:h-[300px]">
                             <img
-                              src={`${url}${item?.img}`}
+                              src={item?.img}
                               className="h-full w-full rounded-lg"
                               alt=""
                             />
@@ -440,7 +476,7 @@ const Catalog = () => {
                       {parseInt(c?.price) > 0 ? c?.price + " " : "Договорная"}₽
                     </p>
                     <div
-                      onClick={() => sendCatalog(c.id)}
+                      onClick={() => sendCatalog(c.id, c?.name)}
                       className="my-4 flex justify-center"
                     >
                       <MyButton title={"Подробнее"} class1={"px-12 mm:px-20"} />
@@ -458,8 +494,9 @@ const Catalog = () => {
           </div>
         </div>
       </div>
+      <PaginationBar pageSize={pageSize} setPageId={setPageId} />
 
-      <div className="flex flex-col w-[92%] mm:w-[88%] mx-auto">
+      <div className="flex flex-col w-[92%] mm:w-[88%] mx-auto mt-16 sm:mt-0">
         <div className="flex gap-3 mb-6 items-center">
           <div className="w-[8px] h-[43px] bg-mainColor " />
           <p className="text-[#313131] text-[24px] sm:text-[32px] lg:text-[40px] font-semibold">
@@ -486,7 +523,7 @@ const Catalog = () => {
                     <SwiperSlide key={index}>
                       <div className="h-[212px] md:h-[300px]">
                         <img
-                          src={`${url}${item?.img}`}
+                          src={item?.img}
                           className="h-full w-full rounded-lg"
                           alt=""
                         />
@@ -500,21 +537,18 @@ const Catalog = () => {
                 <p className="flex justify-center font-medium text-[16px] md:text-[18px] line-clamp-1 text-mainColor">
                   {parseInt(c?.price) > 0 ? c?.price + " " : "Договорная"}₽
                 </p>
-                <Link
-                  to={`/catalog/${c?.id}`}
-                  onClick={() => {
-                    window.scrollTo({ top: 0 });
-                  }}
-                  className="my-4 flex justify-center"
-                >
-                  <MyButton title={"Подробнее"} class1={"px-12 mm:px-20"} />
-                </Link>
+                <div className="my-4 flex justify-center">
+                  <MyButton
+                    title={"Подробнее"}
+                    class1={"px-12 mm:px-20"}
+                    callback={() => sendCatalog(c?.id, c?.name)}
+                  />
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      
     </UserLayout>
   );
 };

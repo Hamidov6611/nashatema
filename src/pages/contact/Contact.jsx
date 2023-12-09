@@ -65,7 +65,7 @@ const Contact = () => {
                     />
                   </div>
                   <p className="text-[19px] md:text-[22px] text-navcolor font-medium font-montserrat">
-                    +79812588511
+                    +79812588511, +79119278511
                   </p>
                 </div>
                 <div className="flex gap-x-8 items-center bg-[#fff] px-4 py-3 w-full">
@@ -77,7 +77,7 @@ const Contact = () => {
                     />
                   </div>
                   <p className="text-[19px] md:text-[22px] text-navcolor font-medium font-montserrat">
-                    info@naschatema.ru
+                    info@naschatema.ru,  nashatemaspb@mail.ru
                   </p>
                 </div>
                 <div className="flex gap-x-8 items-center bg-[#F5F5F5] px-4 py-3 w-full">

@@ -1,12 +1,35 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { url } from "../../../service/url";
 import img from "../../../assets/Logo (1).svg";
 import { FaWhatsapp, FaTelegram, FaPhone, FaTimes, FaVk } from "react-icons/fa";
 
 const Footer = () => {
   const [main, setMain] = useState([]);
+  const [news, setNews] = useState([]);
+  const navigate = useNavigate();
+  const getNewsData = async () => {
+    try {
+      const { data } = await axios.get(
+        `${url}/b_sayt/api/news_objects_list_views/`
+      );
+      console.log(data);
+      setNews(data?.data?.results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getNewsData();
+  }, []);
+
+  const topFunction2 = (id) => {
+    navigate(`/new/${id}`);
+    window.scrollTo({
+      top: 0,
+    });
+  };
   const topFunction = () => {
     window.scrollTo({ top: 0 });
   };
@@ -86,18 +109,18 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* {main?.map((c, i) => {
-            if (i < 3) {
+          {news?.map((c, i) => {
+            if (i < 5) {
               return (
-                <Link
-                  to={`/catalog?main=${c?.id}&status=true`}
+                <div
+                onClick={() => topFunction2(c?.id)}
                   className="text-white text-[16px] md:text-[18px] text-center md:text-start font-medium font-montserrat"
                 >
-                  {c?.name}
-                </Link>
+                  {c?.title}
+                </div>
               );
             }
-          })} */}
+          })}
         </div>
         <div className="flex flex-col gap-y-2 w-full justify-center items-center sm:justify-start sm:items-start">
           <div className="flex gap-3 mb-6 items-center">
@@ -130,10 +153,29 @@ const Footer = () => {
             </div>
             <div className="flex gap-x-4">
               <div className="w-[18.97px] h-[23.14px]">
+                <img src="/Vector (1).svg" alt="" className="w-full h-full " />
+              </div>
+              <Link
+                to="mailto:info@naschatema.ru"
+                className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal"
+              >
+                nashatemaspb@mail.ru
+              </Link>
+            </div>
+            <div className="flex gap-x-4">
+              <div className="w-[18.97px] h-[23.14px]">
                 <img src="/Vector (3).svg" alt="" className="w-full h-full " />
               </div>
               <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
                 +79812588511
+              </p>
+            </div>
+            <div className="flex gap-x-4">
+              <div className="w-[18.97px] h-[23.14px]">
+                <img src="/Vector (3).svg" alt="" className="w-full h-full " />
+              </div>
+              <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
+                +79119278511
               </p>
             </div>
             <div className="flex gap-x-4">

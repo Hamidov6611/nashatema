@@ -74,7 +74,7 @@ const MyProducts = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-3 sticky">
         {product?.map(
           (c, index) =>
-            index < 2 && (
+            index < 3 && (
               <div
                 className="shadow-2xl rounded-lg  gap-y-3 border"
                 onMouseEnter={() => toggleCard2(c?.id)}
@@ -89,7 +89,7 @@ const MyProducts = () => {
                     <SwiperSlide key={index}>
                       <div className="h-[212px] md:h-[300px]">
                         <img
-                          src={`${url}${item?.img}`}
+                          src={item?.img}
                           className="h-full w-full rounded-lg"
                           alt=""
                         />

@@ -134,7 +134,7 @@ let totalSum = calculateTotal(basket)
                 <div className="flex gap-x-4 py-8 justify-center w-full  md:w-[40%]">
                   <div className="w-[122px] h-[98px]">
                     <img
-                      src={url + c?.product[0]?.img}
+                      src={c?.product[0]?.img}
                       alt=""
                       className="h-full w-full rounded-md object-cover object-center"
                     />
@@ -178,9 +178,7 @@ let totalSum = calculateTotal(basket)
                       Итого
                     </p>
                     <p className="text-[15px] font-medium text-navcolor font-montserrat">
-                      {/* {c?.price?.length > 0
-                        ? parseInt(c?.price) * count
-                        : "Договорная"} */}
+                     
                       {c?.itogo
                         ? c?.itogo
                         : (c?.price && c?.count) ? parseInt(c?.price) * parseInt(c?.count) : "Договорная"}

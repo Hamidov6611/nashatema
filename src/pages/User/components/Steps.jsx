@@ -64,7 +64,7 @@ const Steps = () => {
                   <p className="text-white text-center md:text-start text-[24px] lg:text-[30px] font-semibold uppercase font-montserrat">
                     Договор И <span className="text-mainColor">Оплата</span>
                   </p>
-                  <p className="mt-4 md:mr-[80px] font-normal text-[18px] text-center md:text-[19px] text-white">
+                  <p className="mt-4 md:mr-[80px] font-normal line-clamp-3 text-[18px] text-center md:text-[19px] text-white">
                     После подписания договора и оплаты аванса заказ сразу идет в
                     производство.
                   </p>

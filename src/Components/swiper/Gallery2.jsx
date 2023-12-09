@@ -38,7 +38,7 @@ const Gallery2 = ({ data }) => {
             >
               <img
                 className="rounded-md h-full w-full "
-                src={`${url}${c?.img}`}
+                src={c?.img}
               />
             </div>
           </SwiperSlide>
@@ -57,7 +57,7 @@ const Gallery2 = ({ data }) => {
         {data?.product?.map((c, index) => (
           <SwiperSlide key={index}>
             <div className="h-[100px] md:h-[180px]">
-              <img className="rounded-md h-full object-cover w-[260px]" src={`${url}${c?.img}`} />
+              <img className="rounded-md h-full object-cover w-[260px]" src={c?.img} />
             </div>
           </SwiperSlide>
         ))}

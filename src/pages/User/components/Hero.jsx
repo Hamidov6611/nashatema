@@ -65,7 +65,7 @@ const Hero = () => {
       <Completed />
       <HeroNews />
       <Hero2 />
-      <Reviews />
+      {/* <Reviews /> */}
     </div>
   );
 };

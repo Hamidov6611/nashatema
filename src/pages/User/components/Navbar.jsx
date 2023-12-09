@@ -1,22 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import MyRedButton from "./MyRedButton";
 import { navData } from "../../../data";
 import { useSelector } from "react-redux";
 import img from "../../../assets/Logo (1).svg";
+import axios from "axios";
+import { url } from "../../../service/url";
 
 const Navbar = () => {
   const [isMenu, setIsMenu] = useState(false);
   const productCount = useSelector((state) => state.product?.products);
   const navigate = useNavigate();
-  const menuHandler = () => setIsMenu((prev) => !prev);
+  const menuHandler = () => {
+    setIsMenu((prev) => !prev);
+    setSearch("")
+  }
+  const [search, setSearch] = useState("")
+  const [data, setData] = useState([])
   const menuHandlerClose = () => {
+    setSearch("")
     setIsMenu(false);
     window.scrollTo({
       top: 0,
     });
   };
   const topFunction = () => {
+    window.scrollTo({
+      top: 0,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigate(`/catalog?search=${search}`)
+  }
+  const getSearchData = async (search) => {
+    setSearch(search)
+    console.log(search)
+    try {
+      const { data } = await axios.get(
+        `${url}/b_sayt/api/product_filter_view/?search=${search}`
+      );
+      setData(data?.results)
+      console.log(data.results)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const sendCatalog = async (id, name) => {
+    setIsMenu(false)
+    navigate(`/catalog/${id}/${name?.replace(/\//g, "").replace(" ", "_")}`);
     window.scrollTo({
       top: 0,
     });
@@ -28,7 +60,7 @@ const Navbar = () => {
           <div className="flex gap-3 items-center">
             <img src="/Vector.svg" alt="" />
             <p className="text-white font-montserrat leading-normal text-[18px] md:text-[20px]">
-            Деревня Янино 2, Лен Обл.
+              Деревня Янино 2, Лен Обл.
             </p>
           </div>
           <div className="flex gap-3 items-center">
@@ -56,7 +88,7 @@ const Navbar = () => {
               +79812588511
             </Link>
           </div>
-          <MyRedButton 
+          <MyRedButton
             title={"Обратный звонок"}
             callback={() => {
               navigate("/contact");
@@ -65,24 +97,50 @@ const Navbar = () => {
           />
         </div>
       </div>
-      <div className="w-full bg-navcolor fixed top-0 left-0 h-[138px] rounded-b-[10px] flex items-center justify-around gap-x-8 px-[6%] lg:hidden z-50">
+      <div className="w-full bg-navcolor fixed top-0 left-0 h-[98px] rounded-b-[10px] flex items-center justify-between px-[6%] lg:hidden z-50">
         <Link to={"/"} onClick={topFunction}>
-          <img src={img} alt="" />
+          <img src={img} alt="" className="w-[157px]" />
         </Link>
         <div onClick={menuHandler} className="cursor-pointer">
-          <img src="/Vector (4).svg" alt="" />
+          <img src="/Vector (4).svg" alt="" className="w-[21px] h-[15px]" />
         </div>
         {isMenu && (
-          <div className="absolute top-[40px] right-0 z-20 rounded-[10px] w-[90%] flex flex-col lg:hidden h-[540px] bg-white shadow-3xl">
+          <div className="absolute top-[40px] right-0 z-20 rounded-[10px] w-[90%] flex flex-col lg:hidden min-h-[480px] bg-white shadow-3xl">
             <div className="w-full flex justify-around items-center h-[100px] px-[3%]">
               <Link to={"/"}>
-                <img src="/Logo (2).svg" alt="" />
+                <img src="/Logo (2).svg" alt="" className="w-[213px]" />
               </Link>
               <div onClick={menuHandler} className="cursor-pointer">
-                <img src="/Vector (5).svg" alt="" />
+                <img
+                  src="/Vector (5).svg"
+                  alt=""
+                  className="w-[18px] h-[18px]"
+                />
               </div>
             </div>
-            <div className="flex flex-col gap-y-3 px-[8%] w-full mt-[20px] text-navcolor font-medium text-[24px] font-inter">
+            <div className="flex flex-col gap-y-3 px-[8%] w-full mt-[20px] text-[#313131]/70 font-medium text-[20px] font-montserrat">
+              <form onSubmit={handleSubmit}>
+              <input
+                value={search}
+                onChange={(e) => getSearchData(e.target.value)}
+                  type="text"
+                  className="border-2 border-[#313131] rounded-md py-1 px-1 placeholder:text-[#313131]"
+                  placeholder="Поиск продукта..."
+                />
+                {data?.length > 0 && search?.length > 0 && (
+                  <div className="w-full h-[60vh] overflow-y-auto bg-white absolute border p-3 rounded-md left-0 top-[170px] z-20 flex flex-col">
+                  {data?.map((c, i) => (
+                    <div key={i} className="z-30 border-b border-navcolor">
+                      <div className="w-24 h-24">
+                        <img src={c?.product[0]?.img} alt="" className="w-full h-full" />
+                      </div>
+                        <p className="text-[14px] font-montserrat text-blue-700 cursor-pointer" onClick={() => sendCatalog(c?.id, c?.name)}>{c?.name}</p>
+                        <p className="text-[12px] font-normal line-clamp-6 mb-3">{c?.description}</p>
+                    </div>
+                  ))}
+                </div>
+                )}
+              </form>
               <Link onClick={menuHandlerClose} to={"/"}>
                 Главная
               </Link>
@@ -103,15 +161,23 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="flex flex-col mb-4 px-[8%] gap-y-4 mt-4">
-              <div className="flex gap-x-3">
-                <img src="/Vector (3).svg" alt="" />
-                <p className="text-navcolor font-medium text-[24px] font-inter">
+              <div className="flex gap-x-6">
+                <img
+                  src="/Vector (3).svg"
+                  alt=""
+                  className="w-[28px] h-[28px]"
+                />
+                <p className="text-[#313131]/70 font-medium text-[20px] font-montserrat">
                   +79812588511
                 </p>
               </div>
-              <div className="flex gap-x-3">
-                <img src="/Vector (1).svg" alt="" />
-                <p className="text-navcolor font-medium text-[24px] font-inter">
+              <div className="flex gap-x-6">
+                <img
+                  src="/Vector (1).svg"
+                  alt=""
+                  className="w-[28px] h-[28px]"
+                />
+                <p className="text-[#313131]/70 font-medium text-[20px] font-montserrat">
                   info@naschatema.ru
                 </p>
               </div>
@@ -120,28 +186,9 @@ const Navbar = () => {
         )}
       </div>
       <div className="w-[84%] hidden mm:w-[70%] h-[80px] mx-auto lg:flex justify-between items-center bg-white">
-        {/* {navData?.map((c) => (
-          <div className="flex gap-x-2 items-center" key={c.id}>
-            {c?.icon && (
-              <div className="relative">
-                <img src="/Vector (2).svg" alt="" />
-                <div className="absolute  right-[-9px] top-[-12px] bg-[#FF0000] flex items-center justify-center text-white tetx-[13px] font-montserrat font-medium rounded-full w-[20px] h-[20px]">
-                  <p></p>
-                </div>
-              </div>
-            )}
-            <Link
-              to={c?.link}
-              className={`
-               text-navcolor
-            font-montserrat leading-normal text-[18px] md:text-[20px]`}
-            >
-              {c?.title}
-            </Link>
-          </div>
-        ))} */}
+        
         <nav className="flex w-full">
-          <ul className="flex justify-between w-full">
+          <ul className="flex justify-between w-full items-center">
             <li>
               <NavLink
                 exact
@@ -197,6 +244,30 @@ const Navbar = () => {
               >
                 Контакты
               </NavLink>
+            </li>
+            <li>
+            <form onSubmit={handleSubmit} className="relative">
+                <input
+                value={search}
+                onChange={(e) => getSearchData(e.target.value)}
+                  type="text"
+                  className="border-2 border-[#313131] rounded-md py-1 px-1 placeholder:text-[#313131]"
+                  placeholder="Поиск продукта..."
+                />
+                {data?.length > 0 && search?.length > 0 && (
+                  <div className="w-full h-[60vh] overflow-y-auto bg-white absolute border p-3 rounded-md left-0 top-[40px] z-20 flex flex-col">
+                  {data?.map((c, i) => (
+                    <div key={i} className="z-30 border-b border-navcolor">
+                      <div className="w-24 h-24">
+                        <img src={c?.product[0]?.img} alt="" className="w-full h-full" />
+                      </div>
+                        <p className="text-[14px] font-montserrat text-blue-700 cursor-pointer" onClick={() => sendCatalog(c?.id, c?.name)}>{c?.name}</p>
+                        <p className="text-[12px] font-normal line-clamp-6 mb-3">{c?.description}</p>
+                    </div>
+                  ))}
+                </div>
+                )}
+              </form>
             </li>
             <li className="flex gap-x-2">
               <NavLink

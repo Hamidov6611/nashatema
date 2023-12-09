@@ -52,7 +52,7 @@ const WeNews = () => {
                 />
               </div>
               <div className="flex flex-col gap-y-2 px-3 md:px-6">
-                <p className="text-[21px] w-[90%] md:text-[26px] uppercase text-navcolor font-medium md:font-semibold font-montserrat border-b-[3px] border-b-mainColor">
+                <p className="text-[21px] line-clamp-1 w-[90%] md:text-[26px] uppercase text-navcolor font-medium md:font-semibold font-montserrat border-b-[3px] border-b-mainColor">
                   {item?.title}
                 </p>
                 <p className="text-navcolor text-[18px] md:text-[21px] font-medium font-montserrat">

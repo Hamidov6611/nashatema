@@ -32,26 +32,17 @@ const CatalogDetail = () => {
       const { data } = await axios.get(
         `${url}/b_sayt/api/product_deteile_views/${id}/`
       );
-      // setProducts(data?.data?.results);
+      console.log(data)
       setProducts(data);
+      getProductByMainCategoryId(data[0]?.id_category?.id)
      
     } catch (error) {
       console.log(error);
     }
   };
-  const getProductData = async () => {
-    try {
-      const { data } = await axios.get(
-        `${url}/b_sayt/api/prouduct_all_objects_list_views/`
-      );
-      setProducts2(data?.data?.results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
   useEffect(() => {
     getOneProducts();
-    getProductData();
   }, [id]);
   const AddProduct = (item) => {
     // O'zi yangi item yaratish
@@ -82,12 +73,32 @@ const CatalogDetail = () => {
     window.scrollTo({top: 0})
   };
 
-  console.log(products)
+  console.log(products[0]?.id_category?.id)
+  async function getProductByMainCategoryId(id) {
+    try {
+      const { data } = await axios.get(
+        `${url}/b_sayt/api/prouduct_category_list_views/${id}/`
+      );
+      setProducts2(data?.data?.results);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+  const sendCatalog = async (id, name) => {
+    navigate(`/catalog/${id}/${name?.replace(/\//g, "").replace(" ", "_")}`);
+    window.scrollTo({
+      top: 0,
+    });
+  };
  
   
   return (
-    <UserLayout title={"Каталог"}>
+    <UserLayout 
+    title={`${products[0]?.name} купить в Санкт-Петербурге и Лен. обл`} 
+    desc={`${products[0]?.description} доставка по Санкт-Петербургу и Ленинградской области`}
+    h1={products[0]?.name}
+    >
       <div className="mt-[188px] lg:mt-[100px] gap-y-4 flex flex-col lg:mb-[150px] mb-[50px] sm:mb-[100px] ">
         <div className="relative flex w-full flex-col lg:flex-row">
           <div className="flex flex-col w-[92%] mm:w-[88%] mx-auto">
@@ -108,15 +119,7 @@ const CatalogDetail = () => {
                       : "Договорная"}
                   </span>
                 </p>
-                {/* <div className="mt-2">
-                  <ReactStars
-                    color1="#D4D4D4"
-                    color2="#FF5C17"
-                    value={3.3}
-                    count={5}
-                    size={31}
-                  />
-                </div> */}
+                
                 {products[0]?.length > 0 && <p>{products[0]?.seira}</p>}
                 <p className="capitalize mt-6 text-[#0000008f]">рАЗМЕРЫ</p>
 
@@ -299,17 +302,17 @@ const CatalogDetail = () => {
             </div>
             {/* Mobile end*/}
 
-            <div className="mt-12 md:mt-24">
+            {products[0]?.description && <div className="mt-12 md:mt-24">
               <p className="text-[23px] border-b-[3px] mb-4 w-[135px] border-mainColor font-semibold text-navcolor font-montserrat ">
                 ОПИСАНИЕ
               </p>
               <p
                 class="font-medium text-navcolor"
                 dangerouslySetInnerHTML={{
-                  __html: products[0]?.context,
+                  __html: products[0]?.description,
                 }}
               />
-            </div>
+            </div>}
           </div>
         </div>
 
@@ -343,7 +346,7 @@ const CatalogDetail = () => {
                       <SwiperSlide key={index}>
                         <div className="h-[212px] md:h-[300px]">
                           <img
-                            src={`${url}${item?.img}`}
+                            src={item?.img}
                             className="h-full w-full rounded-lg"
                             alt=""
                           />
@@ -358,7 +361,7 @@ const CatalogDetail = () => {
                     {parseInt(c?.price) > 0 ? c?.price + " " : "Договорная"}₽
                   </p>
                   <div className="my-4 flex justify-center">
-                    <MyButton title={"Подробнее"} class1={"px-12 mm:px-20"} />
+                    <MyButton title={"Подробнее"} class1={"px-12 mm:px-20"} callback={() => sendCatalog(c?.id, c?.name)} />
                   </div>
                 </div>
               </div>

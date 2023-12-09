@@ -11,7 +11,7 @@ export const routes = [
   { id: 4, path: "/new", element: <WeNews /> },
   { id: 5, path: "/basket", element: <Basket /> },
   { id: 6, path: "/catalog", element: <Catalog /> },
-  { id: 7, path: "/catalog/:id", element: <CatalogDetail /> },
+  { id: 7, path: "/catalog/:id/:slug", element: <CatalogDetail /> },
   { id: 8, path: "/contact", element: <Contact /> },
   { id: 9, path: "/category", element: <Category /> },
   { id: 10, path: "/login", element: <Login /> },
@@ -21,5 +21,5 @@ export const routes = [
   { id: 14, path: "/edit-image/:id", element: <EditProductImg /> },
   { id: 15, path: '/work-cat', element: <Work />},
   { id: 16, path: '/work', element: <MyWork />},
-  { id: 17, path: '/gal', element: <Gallery />}
+  // { id: 17, path: '/gal', element: <Gallery />}
 ];

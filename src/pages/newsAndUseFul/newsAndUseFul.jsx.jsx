@@ -22,7 +22,7 @@ const NewsAndUseful = () => {
 
   useEffect(() => {
     getNewsDetailData()
-  }, [])
+  }, [id])
   return (
     <UserLayout title={"Новости и полезное"}>
       <div className=" mt-[188px] lg:mt-[100px] gap-y-4 flex flex-col lg:mb-[150px] mb-[50px] sm:mb-[100px] ">
@@ -37,7 +37,7 @@ const NewsAndUseful = () => {
 
             <p className="text-[16px] md:w-[39%] md:text-[18px] font-medium text-lightGray mt-4" 
             dangerouslySetInnerHTML={{
-              __html: news?.content,
+              __html: news?.content.substring(0, 1150),
             }}
             />
           </div>
@@ -48,12 +48,17 @@ const NewsAndUseful = () => {
             <img src={url+news?.img} alt="" className="flex w-full rounded-md h-full" />
           </div>
         </div>
+        <div><p className="text-[16px] md:w-[88%] w-[92%] mx-auto md:text-[18px] font-medium text-lightGray mt-4" 
+            dangerouslySetInnerHTML={{
+              __html: news?.content.substring(1150),
+            }}
+            /></div>
       </div>
 
       <HeroNews />
-      {/* <div className="my-12"></div> */}
+      <div className="my-12"></div>
 
-      <Reviews />
+      {/* <Reviews /> */}
     </UserLayout>
   );
 };
