@@ -4,6 +4,11 @@ import { url } from "../../../service/url";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 const UseFul = () => {
   const [data, setData] = useState([]);
   const getNewsData = async () => {
@@ -50,46 +55,105 @@ const UseFul = () => {
         </p>
       </div>
 
-      <div className="my-[30px] grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-3">
-        {data?.map((c, i) => i < 3 && (
-          <div
-            key={i}
-            className="relative"
-            onMouseEnter={() => toggleCard(c?.id)}
-            onMouseLeave={() => toggleCard2(c?.id)}
-          >
-            <div className=" md:h-[342px]">
-              <img
-                src={url + c?.img}
-                alt=""
-                className="w-full h-full rounded-lg"
-              />
-            </div>
-            {c?.visible && (
-              <div 
-            
-              className="absolute overflow-hidden rounded-b-lg bottom-0 gap-y-1 flex flex-col items-center justify-center left-0 h-[40%] w-full bg-modal2 backdrop-brightness-75">
-                <div className="flex justify-center items-center flex-col"  data-aos="fade-up"
-     data-aos-anchor-placement="bottom-bottom">
-                <p className="text-[24px] md:text-[28px] text-white text-center font-semibold font-montserrat">
-                  {c?.title}
-                </p>
-                <Link
-                  to={`/new/${c?.id}`}
-                  onClick={() => {
-                    window.scrollTo({
-                      top: 0
-                    })
-                  }}
-                  className="text-[20px] font-semibold font-inter  text-mainColor"
-                >
-                  Подробный
-                </Link>
+      <div className="my-[30px] hidden md:grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-3">
+        {data?.map(
+          (c, i) =>
+            i < 3 && (
+              <div
+                key={i}
+                className="relative"
+                onMouseEnter={() => toggleCard(c?.id)}
+                onMouseLeave={() => toggleCard2(c?.id)}
+              >
+                <div className=" md:h-[342px]">
+                  <img
+                    src={url + c?.img}
+                    alt=""
+                    className="w-full h-full rounded-lg"
+                  />
                 </div>
+                {c?.visible && (
+                  <div className="absolute overflow-hidden rounded-b-lg bottom-0 gap-y-1 flex flex-col items-center justify-center left-0 h-[40%] w-full bg-modal2 backdrop-brightness-75">
+                    <div
+                      className="flex justify-center items-center flex-col"
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <p className="text-[24px] md:text-[28px] text-white text-center font-semibold font-montserrat">
+                        {c?.title}
+                      </p>
+                      <Link
+                        to={`/new/${c?.id}`}
+                        onClick={() => {
+                          window.scrollTo({
+                            top: 0,
+                          });
+                        }}
+                        className="text-[20px] font-semibold font-inter  text-mainColor"
+                      >
+                        Подробнее
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            )
+        )}
+      </div>
+      <div className="md:hidden">
+        <Swiper
+          pagination={true}
+          navigation
+          slidesPerView={1}
+          modules={[Navigation]}
+          spaceBetween={50}
+          className="mySwiper"
+          color="red"
+        >
+          {data?.map((c, index) => (
+            <SwiperSlide key={index}>
+              <div
+                key={index}
+                className="relative"
+                onMouseEnter={() => toggleCard(c?.id)}
+                onMouseLeave={() => toggleCard2(c?.id)}
+              >
+                <div className="h-[342px]">
+                  <img
+                    src={url + c?.img}
+                    alt=""
+                    className="w-full h-full rounded-lg"
+                  />
+                </div>
+                {c?.visible && (
+                  <div className="absolute overflow-hidden rounded-b-lg bottom-0 gap-y-1 flex flex-col items-center justify-center left-0 h-[40%] w-full bg-modal2 backdrop-brightness-75">
+                    <div
+                      className="flex justify-center items-center flex-col"
+                      data-aos="fade-up"
+                      data-aos-anchor-placement="bottom-bottom"
+                    >
+                      <p className="text-[24px] md:text-[28px] text-white text-center font-semibold font-montserrat">
+                        {c?.title}
+                      </p>
+                      <Link
+                        to={`/new/${c?.id}`}
+                        onClick={() => {
+                          window.scrollTo({
+                            top: 0,
+                          });
+                        }}
+                        className="text-[20px] font-semibold font-inter  text-mainColor"
+                      >
+                        
+                        Подробнее
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

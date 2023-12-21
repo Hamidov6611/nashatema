@@ -36,10 +36,18 @@ html {
 }
 
 
-.swiper-button-next {
+.swiper-button-next::after {
   color: #ff5c17;
-  font-size: 14px;
+  object-fit: cover;
+  font-size: 20px;
+  font-weight: 700;
 }
-.swiper-button-prev {
+.swiper-button-prev::after {
   color: #ff5c17;
+  object-fit: cover;
+  font-size: 20px;
+  font-weight: 700;
 }
+
+
+

@@ -42,10 +42,10 @@ const Onas = () => {
             </div>
           </div>
           <div className="lg:absolute mt-4 hidden lg:flex lg:right-0 lg:mt-0 lg:w-[37%]">
-            <img src="/Фотка.svg" alt="" className="w-full h-full" />
+            <img src="/Фотка.webp" alt="" className="w-full h-full" />
           </div>
           <div className="w-[90%] mr-0 ml-[10%] mt-[35px] lg:hidden flex justify-end ">
-            <img src="/Фотка.svg" alt="" />
+            <img src="/Фотка.webp" alt="" />
           </div>
         </div>
       </div>

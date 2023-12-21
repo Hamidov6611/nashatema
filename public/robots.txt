@@ -1,3 +1,6 @@
 User-agent: *
 Allow: /puplic
-Sitemap: https://naschatema.ru/sitemap.xml
+Allow: /src
+Disallow: /build/
+Disallow: /node_modules/
+Sitemap: https://www.naschatema.ru/sitemap.xml

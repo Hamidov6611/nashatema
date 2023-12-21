@@ -138,8 +138,8 @@ const HeroNews = () => {
         >
           {news?.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="flex flex-col gap-y-4 border shadow-md rounded-md ">
-                <div className="h-[321px]">
+              <div className="flex flex-col gap-y-2 md:gap-y-4 border shadow-md rounded-md ">
+                <div className="h-[220px] md:h-[321px]">
                   <img
                     src={url + item?.img}
                     alt="Rectangle 99.png"
@@ -160,7 +160,7 @@ const HeroNews = () => {
                     }}
                   />
                 </div>
-                <div className="px-3 md:px-6 mb-4">
+                <div className="px-3 md:px-6 mb-4 flex w-full justify-center md:justify-start">
                   <MyButton
                     title={"Подробнее"}
                     callback={() => topFunction(item?.id)}

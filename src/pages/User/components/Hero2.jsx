@@ -9,7 +9,7 @@ const Hero2 = () => {
     window.scrollTo({top: 200})
   }
   return (
-    <div className="lg:mt-[200px] mt-[50px] sm:mt-[100px] gap-y-4 flex flex-col  ">
+    <div className="lg:mt-[200px] mt-[50px] sm:mt-[100px] gap-y-4 flex flex-col">
       <div className="relative flex w-full flex-col lg:flex-row">
         <div className="flex flex-col w-[92%] mm:w-[88%] mx-auto">
           <div className="flex gap-3 mb-6 items-center">
@@ -34,10 +34,10 @@ const Hero2 = () => {
           </div>
         </div>
         <div className="lg:absolute mt-4 hidden lg:flex lg:right-0 lg:mt-0 lg:w-[47%]">
-          <img src="/Фотка.svg" alt="" className="w-full h-full" />
+          <img src="/Фотка.webp" alt="" className="w-full h-full" />
         </div>
         <div className="w-[90%] mr-0 ml-[10%] mt-[35px] lg:hidden flex justify-end ">
-          <img src="/Фотка.svg" alt="" />
+          <img src="/Фотка.webp" alt="" />
         </div>
       </div>
     </div>

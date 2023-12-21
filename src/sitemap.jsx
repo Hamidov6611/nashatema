@@ -8,8 +8,9 @@ const Sitemap = () => {
     const sitemapItems = routes.map(
       (route) =>
         `<url>
-        <loc>${window.location.origin}${route.path}</loc>
-      </url>`
+          <loc>${window.location.origin}${route.path}</loc>
+          <priority>${route.priority || "0.5"}</priority>
+        </url>`
     );
 
     return `<?xml version="1.0" encoding="UTF-8"?>

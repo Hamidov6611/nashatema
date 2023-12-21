@@ -56,25 +56,25 @@ const CONSULTATION = () => {
     <form
       ref={form}
       onSubmit={submitHandler}
-      className="w-[98%] mx-auto min-h-[602px] gap-y-12 py-12 flex md:flex-row flex-col bg-navcolor rounded-[20px] mt-[80px] px-[30px] md:px-[50px] lg:px-[80px] pt-[15px] md:pt-[30px] lg:pt-[60px]"
+      className="w-[98%] mx-auto min-h-[302px] gap-y-4 md:gap-y-12 py-4 md:py-12 flex md:flex-row flex-col bg-navcolor rounded-[20px] mt-[80px] px-[30px] md:px-[50px] lg:px-[80px] pt-[15px] md:pt-[30px] lg:pt-[60px]"
     >
       <div className="w-full md:w-[50%]">
-        <p className="text-white text-center md:text-start mt-10 md:mt-0 text-[24px] md:text-[18px] lg:text-[36px] font-semibold">
+        <p className="text-white text-center md:text-start mt-2 md:mt-0 text-[16px] md:text-[18px] lg:text-[36px] font-semibold">
           БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ
         </p>
-        <p className="font-normal font-montserrat text-center md:text-start text-[14px] mt-3 text-white md:text-[17px]">
+        <p className="font-normal font-montserrat text-center md:text-start text-[12px] sm:text-[14px] mt-3 text-white md:text-[17px]">
           Сориентируем по стоимости и срокам доставки
           <br className="hidden md:flex" /> железобетонных изделий
         </p>
 
-        <div className="my-4 flex flex-col space-y-12 md:w-[66%] w-full">
-          <div className="relative w-full mt-6">
-            <div className="absolute w-[26px] h-[29px]">
+        <div className="py-2 md:my-4 flex flex-col space-y-8 md:space-y-12 md:w-[66%] w-full">
+          <div className="relative w-full mt-3 md:mt-6">
+            <div className="absolute md:w-[26px] md:h-[29px] w-4 h-4">
               <img src="/Vector (6).svg" alt="" className="w-full h-full" />
             </div>
             <input
               type="text"
-              className=" outline-none py-2 px-12 text-slate-300 bg-transparent font-normal font-montserrat text-[17px] md:text-[18px] border-b border-b-slate-300 w-full"
+              className=" outline-none md:py-2 px-8 md:px-12 text-slate-300 bg-transparent font-normal font-montserrat text-[17px] md:text-[18px] border-b border-b-slate-300 w-full"
               placeholder="Введите ваше имя"
               name="user_name"
               value={postData.user_name}
@@ -97,12 +97,12 @@ const CONSULTATION = () => {
             rows="10"
           ></textarea>
           <div className="relative w-full">
-            <div className="absolute w-[26px] h-[29px]">
+            <div className="absolute md:w-[26px] md:h-[29px] w-4 h-4">
               <img src="/Vector (7).svg" alt="" className="w-full h-full" />
             </div>
             <input
               type="text"
-              className=" outline-none py-2 px-12 text-slate-300 bg-transparent font-normal font-montserrat text-[17px] md:text-[18px] border-b border-b-slate-300 w-full"
+              className=" outline-none md:py-2 px-8 md:px-12 text-slate-300 bg-transparent font-normal font-montserrat text-[17px] md:text-[18px] border-b border-b-slate-300 w-full"
               placeholder="Номер телефона"
               name="phone"
               value={postData.phone}
@@ -114,7 +114,7 @@ const CONSULTATION = () => {
 
         {isSendModal && (
           <div className="fixed top-0 left-0 bg-black/60 z-20 w-full h-screen flex items-center justify-center">
-            <div className="bg-white rounded-md w-[300px] flex flex-col gap-y-4 py-6 px-8  ">
+            <div className="bg-white rounded-md w-[300px] flex flex-col gap-y-4 py-2 md:py-6 px-8  ">
               <p className="text-black text-base md:text-[20px] font-montserrat font-bold ">
                 Оставить заявку?
               </p>
@@ -184,20 +184,24 @@ const CONSULTATION = () => {
           </div>
         )}
 
-        <div className="mt-12 md:mt-16 mb-3">
+        <div className="mt-4 md:mt-16 mb-3">
           <MyBlackButton
             submit={true}
             title={"Оставить заявку"}
             class1={"px-24"}
           />
         </div>
-        <p className="p-0 m-0 text-center md:text-start font-normal font-montserrat text-[14px] mt-3 text-white md:text-[17px]">
+        <p className="p-0 m-0 text-center md:text-start font-normal font-montserrat text-[12px] sm:text-[14px] mt-3 text-white md:text-[17px]">
           Заполняя эту форму, вы даёте согласие <br /> на обработку ваших
           персональных данных
         </p>
       </div>
-      <div className="w-full md:w-[50%]">
-        <img src="/Mask group.png" alt="" className="w-full h-full" />
+      <div className="w-full md:w-[50%] h-[80%]">
+        <img
+          src="/Mask group.png"
+          alt=""
+          className="w-full h-[70%] md:h-full"
+        />
       </div>
     </form>
   );

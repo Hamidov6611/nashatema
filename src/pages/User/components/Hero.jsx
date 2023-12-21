@@ -24,10 +24,10 @@ const Hero = () => {
               className="absolute -z-10 top-0 left-0"
             />
           </div>
-          <h1 className="uppercase font-montserrat text-[32px] md:text-[42px] mm:text-[65px] font-semibold lg:font-[800] text-navcolor">
+          <h1 className="uppercase font-montserrat text-[32px] md:text-[42px] xl:text-[50px] 2xl:text-[65px] font-semibold lg:font-[800] text-navcolor">
             Железобетонные
           </h1>
-          <h1 className="uppercase font-montserrat text-[32px] md:text-[42px] mm:text-[65px] font-semibold lg:font-[800] text-navcolor">
+          <h1 className="uppercase font-montserrat text-[32px] md:text-[42px] xl:text-[50px] 2xl:text-[65px] font-semibold lg:font-[800] text-navcolor">
             {" "}
             ИЗДЕЛИЯ
           </h1>
@@ -35,12 +35,12 @@ const Hero = () => {
             Работаем с вами от консультации до поставки товара с <br />{" "}
             окончательным сопровождением бухгалтерии
           </p>
-          <p className="text-[18px] tracking-[1px] md:text-[18px] font-medium text-lightGray lg:hidden">
+          <p className="text-[18px] tracking-[1px] mt-3 md:text-[18px] font-medium text-lightGray lg:hidden">
             Работаем с вами от консультации <br /> до поставки товара с <br />{" "}
             окончательным сопровождением бухгалтерии
           </p>
 
-          <div className="mt-[6%]">
+          <div className="mt-[6%] flex w-full justify-center md:justify-start">
             <MyButton
               title={"Расчитать стоимость"}
               callback={() => {
@@ -51,10 +51,10 @@ const Hero = () => {
           </div>
         </div>
         <div className="lg:absolute hidden lg:flex lg:right-0 lg:mt-0 lg:w-[47%]">
-          <img src="/Фотка.svg" alt="" className="w-full h-full" />
+          <img src="/Фотка.webp" alt="" className="w-full h-full" />
         </div>
         <div className="w-[90%] mr-0 ml-[10%] mt-[35px] lg:hidden flex justify-end ">
-          <img src="/Фотка.svg" alt="" />
+          <img src="/Фотка.webp" alt="" />
         </div>
       </div>
 

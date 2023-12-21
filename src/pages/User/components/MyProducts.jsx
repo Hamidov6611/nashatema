@@ -54,9 +54,8 @@ const MyProducts = () => {
       )
     );
   };
-  const sendCatalog = (id) => {
-    console.log(id);
-    navigate(`/catalog/${id}`);
+  const sendCatalog = async (id, name) => {
+    navigate(`/catalog/${id}/${name?.replace(/\//g, "").replace(" ", "_")}`);
     window.scrollTo({
       top: 0,
     });
@@ -128,7 +127,7 @@ const MyProducts = () => {
                       <MyButton
                         title={"В каталог"}
                         class1={"font-semibold text-[18px] px-12 border"}
-                        callback={() => sendCatalog(c?.id)}
+                        callback={() => sendCatalog(c?.id, c?.name)}
                       />
                     </div>
                   </div>

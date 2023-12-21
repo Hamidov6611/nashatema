@@ -64,8 +64,8 @@ const Contact = () => {
                       className="w-full h-full"
                     />
                   </div>
-                  <p className="text-[19px] md:text-[22px] text-navcolor font-medium font-montserrat">
-                    +79812588511, +79119278511
+                  <p className="text-[19px] md:text-[16px] 2xl:text-[22px] text-navcolor font-medium font-montserrat">
+                    +79812588511, +79119278511, +79111198511, +79939878511
                   </p>
                 </div>
                 <div className="flex gap-x-8 items-center bg-[#fff] px-4 py-3 w-full">
@@ -76,7 +76,7 @@ const Contact = () => {
                       className="w-full h-full"
                     />
                   </div>
-                  <p className="text-[19px] md:text-[22px] text-navcolor font-medium font-montserrat">
+                  <p className="text-[19px] md:text-[16px] 2xl:text-[22px] text-navcolor font-medium font-montserrat">
                     info@naschatema.ru,  nashatemaspb@mail.ru
                   </p>
                 </div>
@@ -88,7 +88,7 @@ const Contact = () => {
                       className="w-full h-full"
                     />
                   </div>
-                  <p className="text-[17px] sm:text-[19px] md:text-[22px] text-navcolor font-medium font-montserrat">
+                  <p className="text-[17px] sm:text-[19px] md:text-[16px] 2xl:text-[22px] text-navcolor font-medium font-montserrat">
                     Ленинградская обл, Заневское городское поселение, ул. Янино,
                     д. 2
                   </p>
@@ -101,7 +101,7 @@ const Contact = () => {
                       className="w-full h-full"
                     />
                   </div>
-                  <p className="text-[19px] md:text-[22px] text-navcolor font-medium font-montserrat">
+                  <p className="text-[19px] md:text-[16px] 2xl:text-[22px] text-navcolor font-medium font-montserrat">
                     ПН-ПТ 9:00 до 18:00
                   </p>
                 </div>
@@ -156,7 +156,7 @@ const Contact = () => {
                 className="flex w-full flex-col gap-y-4 shadow-md border rounded-[2px] px-6 md:px-12 py-4"
               >
                 <div className="flex gap-x-4 items-center  px-4 py-2 w-full">
-                  <p className="text-[19px] md:text-[22px] lg:text-[33px] text-[#000] font-semibold font-montserrat">
+                  <p className="text-[19px] md:text-[16px] 2xl:text-[22px] lg:text-[33px] text-[#000] font-semibold font-montserrat">
                     Оставьте сообщение
                   </p>
                 </div>

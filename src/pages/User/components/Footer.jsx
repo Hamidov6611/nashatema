@@ -113,7 +113,7 @@ const Footer = () => {
             if (i < 5) {
               return (
                 <div
-                onClick={() => topFunction2(c?.id)}
+                  onClick={() => topFunction2(c?.id)}
                   className="text-white text-[16px] md:text-[18px] text-center md:text-start font-medium font-montserrat"
                 >
                   {c?.title}
@@ -162,21 +162,55 @@ const Footer = () => {
                 nashatemaspb@mail.ru
               </Link>
             </div>
-            <div className="flex gap-x-4">
-              <div className="w-[18.97px] h-[23.14px]">
-                <img src="/Vector (3).svg" alt="" className="w-full h-full " />
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+              <div className="flex gap-x-4">
+                <div className="w-[18.97px] h-[23.14px]">
+                  <img
+                    src="/Vector (3).svg"
+                    alt=""
+                    className="w-full h-full "
+                  />
+                </div>
+                <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
+                  +79812588511
+                </p>
               </div>
-              <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
-                +79812588511
-              </p>
-            </div>
-            <div className="flex gap-x-4">
-              <div className="w-[18.97px] h-[23.14px]">
-                <img src="/Vector (3).svg" alt="" className="w-full h-full " />
+              <div className="flex gap-x-4">
+                <div className="w-[18.97px] h-[23.14px]">
+                  <img
+                    src="/Vector (3).svg"
+                    alt=""
+                    className="w-full h-full "
+                  />
+                </div>
+                <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
+                  +79119278511
+                </p>
               </div>
-              <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
-                +79119278511
-              </p>
+              <div className="flex gap-x-4">
+                <div className="w-[18.97px] h-[23.14px]">
+                  <img
+                    src="/Vector (3).svg"
+                    alt=""
+                    className="w-full h-full "
+                  />
+                </div>
+                <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
+                  +79111198511
+                </p>
+              </div>
+              <div className="flex gap-x-4">
+                <div className="w-[18.97px] h-[23.14px]">
+                  <img
+                    src="/Vector (3).svg"
+                    alt=""
+                    className="w-full h-full "
+                  />
+                </div>
+                <p className="text-white text-[16px] md:text-[18px] font-medium font-montserrat leading-normal">
+                  +79939878511
+                </p>
+              </div>
             </div>
             <div className="flex gap-x-4">
               <Link
